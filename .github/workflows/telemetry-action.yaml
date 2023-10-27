@@ -1,0 +1,19 @@
+name: Telemetry Action Example
+
+on: 
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build_project:
+    runs-on: ubuntu:latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with: 
+          node-version-file: '.nvmrc'
+      - name: Collect Workflow Telemetry
+        uses: runforesight/workflow-telemetry-action@v1
+      - run: npm ci
+      - run: npm run build
